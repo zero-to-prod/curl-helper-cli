@@ -16,7 +16,7 @@ RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-interacti
 
 COPY . /app
 
-RUN chmod +x /app/bin/:slug
+RUN chmod +x /app/bin/curl-helper-cli
 
 FROM php:8.2-alpine
 
@@ -24,4 +24,4 @@ WORKDIR /app
 
 COPY --from=builder /app /app
 
-ENTRYPOINT ["php", "bin/:slug", "--ansi"]
+ENTRYPOINT ["php", "bin/curl-helper-cli", "--ansi"]
