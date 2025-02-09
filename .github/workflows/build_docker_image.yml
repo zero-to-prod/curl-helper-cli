@@ -44,8 +44,6 @@ jobs:
           tags: |
             davidsmith3/curl-helper-cli:latest
             davidsmith3/curl-helper-cli:${{ env.VERSION }}
-          cache-from: type=registry,ref=davidsmith3/curl-helper-cli:buildcache
-          cache-to: type=registry,ref=davidsmith3/curl-helper-cli:buildcache,mode=max
           build-args: |
             NODE_ENV=production
           labels: |
