@@ -9,12 +9,18 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Zerotoprod\CurlHelper\CurlHelper;
 
+/**
+ * @link https://github.com/zero-to-prod/curl-helper-cli
+ */
 #[AsCommand(
     name: ParseHeadersCommand::signature,
     description: 'Returns the headers of a curl request.'
 )]
 class ParseHeadersCommand extends Command
 {
+    /**
+     * @link https://github.com/zero-to-prod/curl-helper-cli
+     */
     public const signature = 'curl-helper-cli:parse-header';
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -40,6 +46,9 @@ class ParseHeadersCommand extends Command
         return Command::SUCCESS;
     }
 
+    /**
+     * @link https://github.com/zero-to-prod/curl-helper-cli
+     */
     public function configure(): void
     {
         $this->addArgument(ParseHeadersArguments::url, InputArgument::REQUIRED, 'The request URI.');
