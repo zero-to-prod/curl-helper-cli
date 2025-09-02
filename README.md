@@ -18,7 +18,12 @@
 - [Introduction](#introduction)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Documentation Publishing](#documentation-publishing)
+  - [Automatic Documentation Publishing](#automatic-documentation-publishing)
 - [Usage](#usage)
+  - [Available Commands](#available-commands)
+    - [`curl-helper-cli:parse-header`](#curl-helper-cliparse-header)
+    - [`curl-helper-cli:src`](#curl-helper-clisrc)
 - [Docker Image](#docker-image)
 - [Local Development](./LOCAL_DEVELOPMENT.md)
 - [Image Development](./IMAGE_DEVELOPMENT.md)
@@ -40,7 +45,40 @@ Install `Zerotoprod\CurlHelperCli` via [Composer](https://getcomposer.org/):
 composer require zero-to-prod/curl-helper-cli
 ```
 
-This will add the package to your project’s dependencies and create an autoloader entry for it.
+This will add the package to your project's dependencies and create an autoloader entry for it.
+
+## Documentation Publishing
+
+You can publish this README to your local documentation directory.
+
+This can be useful for providing documentation for AI agents.
+
+This can be done using the included script:
+
+```bash
+# Publish to default location (./docs/zero-to-prod/curl-helper-cli)
+vendor/bin/zero-to-prod-curl-helper-cli
+
+# Publish to custom directory
+vendor/bin/zero-to-prod-curl-helper-cli /path/to/your/docs
+```
+
+### Automatic Documentation Publishing
+
+You can automatically publish documentation by adding the following to your `composer.json`:
+
+```json
+{
+    "scripts": {
+        "post-install-cmd": [
+            "zero-to-prod-curl-helper-cli"
+        ],
+        "post-update-cmd": [
+            "zero-to-prod-curl-helper-cli"
+        ]
+    }
+}
+```
 
 ## Usage
 
@@ -48,6 +86,69 @@ Run this command to see the available commands:
 
 ```shell
 vendor/bin/curl-helper-cli list
+```
+
+### Available Commands
+
+#### `curl-helper-cli:parse-header`
+
+Returns the headers of a curl request as a JSON response.
+
+**Description:** This command makes a HTTP request to the specified URL and parses the response headers into a structured JSON format.
+
+**Usage:**
+```shell
+vendor/bin/curl-helper-cli curl-helper-cli:parse-header <url>
+```
+
+**Arguments:**
+- `url` (required): The request URI to fetch headers from
+
+**Examples:**
+
+```shell
+# Get headers from a website
+vendor/bin/curl-helper-cli curl-helper-cli:parse-header https://httpbin.org/get
+
+# Get headers from an API endpoint
+vendor/bin/curl-helper-cli curl-helper-cli:parse-header https://api.github.com/users/octocat
+
+# Get headers from a local development server
+vendor/bin/curl-helper-cli curl-helper-cli:parse-header http://localhost:8000/api/status
+```
+
+**Sample Output:**
+```json
+{
+    "Content-Type": "application/json",
+    "Content-Length": "234",
+    "Server": "nginx/1.18.0",
+    "Date": "Mon, 01 Jan 2024 12:00:00 GMT",
+    "Cache-Control": "no-cache, private"
+}
+```
+
+#### `curl-helper-cli:src`
+
+Displays the project source link.
+
+**Description:** A simple command that outputs the GitHub repository URL for this project.
+
+**Usage:**
+```shell
+vendor/bin/curl-helper-cli curl-helper-cli:src
+```
+
+**Arguments:** None
+
+**Example:**
+```shell
+vendor/bin/curl-helper-cli curl-helper-cli:src
+```
+
+**Output:**
+```
+https://github.com/zero-to-prod/curl-helper-cli
 ```
 
 ## Docker Image
